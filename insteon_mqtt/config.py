@@ -60,7 +60,7 @@ def validate(path):
     scenes_path = insteon.get('scenes', None)
     if scenes_path is not None:
         with open(scenes_path, "r") as f:
-            document = yaml.load(f, Loader)
+            document = yaml.safe_load(f)
         # This is a bit hacky, we have to move the scenes contents into a
         # root key because cerberus has to have a root key
         scenes = {"scenes": document}
@@ -82,7 +82,7 @@ def validate_file(document, schema_file, name):
     schema = None
     schema_file_path = os.path.join(basepath, 'data', schema_file)
     with open(schema_file_path, "r") as f:
-        schema = yaml.load(f, Loader=yaml.Loader)
+        schema = yaml.safe_load(f)
 
     v = IMValidator(schema, error_handler=MetaErrorHandler(schema=schema))
     valid = v.validate(document)
@@ -138,10 +138,10 @@ def load(path):
     user_config = {}
 
     with open(base_config_path, "r") as f:
-        base_config = yaml.load(f, Loader)
+        base_config = yaml.safe_load(f)
 
     with open(path, "r") as f:
-        user_config = yaml.load(f, Loader)
+        user_config = yaml.safe_load(f)
 
     return overlay(base_config, user_config)
 
@@ -273,7 +273,7 @@ class Loader(yaml.Loader):
         """
         path = os.path.join(self._base_dir, filename)
         with open(path, 'r') as f:
-            return yaml.load(f, Loader)
+            return yaml.safe_load(f)
 
     #-----------------------------------------------------------------------
     def rel_path(self, node):

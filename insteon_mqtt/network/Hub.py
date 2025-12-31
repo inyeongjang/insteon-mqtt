@@ -292,7 +292,7 @@ class HubClient:
         Performs the HTTP call to get the read buffer.
         '''
         try:
-            response = requests.get('http://%s:%s/buffstatus.xml' %
+            response = requests.get('https://%s:%s/buffstatus.xml' %
                                     (self.ip, self.port),
                                     auth=requests.auth.HTTPBasicAuth(
                                         self.user,
@@ -368,7 +368,7 @@ class HubClient:
         if not self._write_queue.empty():
             command = self._write_queue.get()
             cmd_str = command.hex()
-            url = 'http://%s:%s/3?%s=I=3' % (self.ip, self.port, cmd_str)
+            url = 'https://%s:%s/3?%s=I=3' % (self.ip, self.port, cmd_str)
             try:
                 requests.get(url,
                              auth=requests.auth.HTTPBasicAuth(self.user,

@@ -41,27 +41,7 @@ class Mqtt(Link):
     except AttributeError:
         pass
     try:
-        TLS_VER_OPTIONS['tlsv1'] = ssl.PROTOCOL_TLSv1
-    except AttributeError:
-        pass
-    try:
-        TLS_VER_OPTIONS['tlsv11'] = ssl.PROTOCOL_TLSv1_1
-    except AttributeError:
-        pass
-    try:
         TLS_VER_OPTIONS['tlsv12'] = ssl.PROTOCOL_TLSv1_2
-    except AttributeError:
-        pass
-    try:
-        TLS_VER_OPTIONS['sslv2'] = ssl.PROTOCOL_SSLv2
-    except AttributeError:
-        pass
-    try:
-        TLS_VER_OPTIONS['sslv23'] = ssl.PROTOCOL_SSLv23
-    except AttributeError:
-        pass
-    try:
-        TLS_VER_OPTIONS['sslv3'] = ssl.PROTOCOL_SSLv3
     except AttributeError:
         pass
 
